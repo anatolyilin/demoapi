@@ -10,11 +10,10 @@ public class CalculationController {
     public static final String BASE_URL = "/api/v1/compute/";
 
 
-//    @PostMapping("/add")
-//    @ResponseStatus(HttpStatus.ACCEPTED)
-//    public int add(@RequestBody int a, @RequestBody  int b) {
-//        return (a+b);
-//    }
+    @GetMapping("/add/{number_a}/{number_b}")
+    public int add(@PathVariable int number_a, @PathVariable int number_b){
+        return (number_a + number_b);
+    }
 
     @PostMapping("/add")
     @ResponseStatus(HttpStatus.ACCEPTED)
