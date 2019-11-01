@@ -11,9 +11,7 @@ class NumberContainerTest {
 
     @Test
     void add() {
-        numberContainer = new NumberContainer();
-        numberContainer.setNumber_a(2);
-        numberContainer.setNumber_b(3);
+        numberContainer = new NumberContainer(2,3);
         assertEquals(5,numberContainer.add());
     }
 }
