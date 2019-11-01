@@ -1,9 +1,13 @@
 package com.example.demo.domain;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
+@ApiModel(description = "Object to hold and add two integers")
 public class NumberContainer {
-
+    @ApiModelProperty(notes = "First number, String encoding accepted")
     private int number_a;
+    @ApiModelProperty(notes = "Second number, String encoding accepted")
     private int number_b;
 
     public void setNumber_a(int number_a){
@@ -22,6 +26,7 @@ public class NumberContainer {
         return number_b;
     }
 
+    // TODO: catch for integer overflow
     public int add() {
         return number_a + number_b;
     }
