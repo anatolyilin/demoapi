@@ -1,7 +1,7 @@
 package com.example.demo.domain;
 
 
-public class NumberContrainer {
+public class NumberContainer {
 
     private int number_a;
     private int number_b;
@@ -23,7 +23,7 @@ public class NumberContrainer {
     }
 
     public int add() {
-        return getNumber_a() + getNumber_b();
+        return number_a + number_b;
     }
 
 }

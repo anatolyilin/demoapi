@@ -1,6 +1,6 @@
 package com.example.demo.controller;
 
-import com.example.demo.domain.NumberContrainer;
+import com.example.demo.domain.NumberContainer;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,7 +18,7 @@ public class CalculationController {
 
     @PostMapping("/add")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public int add(@RequestBody NumberContrainer numberContrainer) {
-        return numberContrainer.add();
+    public int add(@RequestBody NumberContainer numberContainer) {
+        return numberContainer.add();
     }
 }
