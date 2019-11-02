@@ -4,6 +4,7 @@ package com.example.demo.domain;
 import javax.validation.constraints.NotNull;
 
 public class NumberContainer {
+
     @NotNull
     private String number_a;
     @NotNull
@@ -25,8 +26,13 @@ public class NumberContainer {
         return number_b;
     }
 
-    public int add() {
-        return Integer.parseInt(number_a) + Integer.parseInt(number_b);
-    }
+    public int add() throws Exception {
+            long res = Long.parseLong(number_a) + Integer.parseInt(number_b);
 
+            if (res < Integer.MAX_VALUE) {
+                return (int) res;
+            } else {
+                throw new ArithmeticException("Integer overflow");
+            }
+    }
 }

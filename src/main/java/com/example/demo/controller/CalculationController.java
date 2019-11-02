@@ -20,14 +20,24 @@ public class CalculationController {
         return (number_a + number_b);
     }
 
-//    @PostMapping("/add")
-//    @ResponseStatus(HttpStatus.ACCEPTED)
     @PostMapping(
             path="/add",
             consumes = {MediaType.APPLICATION_JSON_VALUE},
             produces = {MediaType.ALL_VALUE}
     )
-    public String add(@Valid @RequestBody(required = true)  NumberContainer numberContainer) {
+    public String add(@Valid @RequestBody(required = true)  NumberContainer numberContainer) throws Exception {
         return ""+numberContainer.add();
+    }
+
+    @ExceptionHandler(value=ArithmeticException.class)
+    public String handleOverflowException(Exception e){
+        System.out.println("Integer overflow");
+        return "Integer overflow occured";
+    }
+
+    @ExceptionHandler(value=NumberFormatException.class)
+    public String handleMalformedInputException(Exception e){
+        System.out.println("Malformed input");
+        return "Malformed input";
     }
 }
