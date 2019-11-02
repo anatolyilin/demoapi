@@ -14,6 +14,7 @@ import javax.validation.Valid;
 @RequestMapping(CalculationController.BASE_URL)
 @Validated
 public class CalculationController {
+
     public static final String BASE_URL = "/api/v1/compute/";
 
     @ApiOperation(value ="GET method for adding to integers", response=Integer.class)
@@ -29,17 +30,20 @@ public class CalculationController {
             consumes = {MediaType.APPLICATION_JSON_VALUE},
             produces = {MediaType.ALL_VALUE}
     )
+
     @ResponseStatus(HttpStatus.ACCEPTED)
     public String add(@ApiParam(value = "Json object with two integer values to add", required = true) @Valid @RequestBody(required = true)  NumberContainer numberContainer) throws Exception {
         return ""+numberContainer.add();
     }
 
+    // TODO return proper json
     @ExceptionHandler(value=ArithmeticException.class)
     public String handleOverflowException(Exception e){
         System.out.println("Integer overflow");
         return "Integer overflow occured";
     }
 
+    // TODO return proper json
     @ExceptionHandler(value=NumberFormatException.class)
     public String handleMalformedInputException(Exception e){
         System.out.println("Malformed input");
