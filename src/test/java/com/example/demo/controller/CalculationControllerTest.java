@@ -65,14 +65,4 @@ class CalculationControllerTest {
                 .andReturn();
         assertEquals("2",result.getResponse().getContentAsString());
     }
-
-    @Ignore("Until GET parameters can be parsed")
-    @Test
-    void testAddGetString() throws Exception {
-        MvcResult result = this.mockMvc.perform(get(CalculationController.BASE_URL+"/add/'1'/'1'"))
-                .andDo(print())
-                .andExpect(status().isOk())
-                .andReturn();
-        assertEquals("2",result.getResponse().getContentAsString());
-    }
 }
