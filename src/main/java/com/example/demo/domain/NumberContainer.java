@@ -1,12 +1,18 @@
 package com.example.demo.domain;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 import javax.validation.constraints.NotNull;
 
+@ApiModel(description = "Object to hold and add two integers")
 public class NumberContainer {
 
+    @ApiModelProperty(notes = "First number, String encoding accepted")
     @NotNull
     private String number_a;
+
+    @ApiModelProperty(notes = "Second number, String encoding accepted")
     @NotNull
     private String number_b;
 
@@ -35,4 +41,5 @@ public class NumberContainer {
                 throw new ArithmeticException("Integer overflow");
             }
     }
+
 }
