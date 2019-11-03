@@ -47,10 +47,11 @@ agent any
 
     stage('Artifact'){
         steps{
-            $class: 'ArtifactArchiver', artifacts: '**/target/*.jar', fingerprint: true
+            archiveArtifacts artifacts: 'build/libs/**/*.jar', fingerprint: true
+            junit 'build/reports/**/*.xml'
         }
     }
-//     stage 'Artifact'
+//     stage 'Artifact' $class: 'ArtifactArchiver', artifacts: '**/target/*.jar', fingerprint: true
 //     steps([$class: 'ArtifactArchiver', artifacts: '**/target/*.jar', fingerprint: true])
 
 //     stage 'Docker Deploy Hub'
