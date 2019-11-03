@@ -146,4 +146,14 @@ class CalculationControllerTest {
 
         assertEquals( env.getProperty("error.input.malformednumbers"),result.getResponse().getContentAsString());
     }
+
+    @Test
+    void testAddGetOverflow() throws Exception {
+        MvcResult result = this.mockMvc.perform(get(CalculationController.BASE_URL+"/add/1000000000000/100000000000"))
+                .andDo(print())
+                .andExpect(status().isUnprocessableEntity())
+                .andReturn();
+
+        assertEquals( env.getProperty("error.input.malformednumbers"),result.getResponse().getContentAsString());
+    }
 }
