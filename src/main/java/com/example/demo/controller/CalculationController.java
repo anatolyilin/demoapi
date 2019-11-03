@@ -3,6 +3,10 @@ package com.example.demo.controller;
 import com.example.demo.domain.NumberContainer;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import lombok.Value;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
@@ -10,10 +14,14 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
+
 @RestController
 @RequestMapping(CalculationController.BASE_URL)
 @Validated
 public class CalculationController {
+
+    @Autowired
+    private Environment env;
 
     public static final String BASE_URL = "/api/v1/compute/";
 
@@ -38,15 +46,17 @@ public class CalculationController {
 
     // TODO return proper json
     @ExceptionHandler(value=ArithmeticException.class)
+    @ResponseStatus(HttpStatus.NOT_ACCEPTABLE)
     public String handleOverflowException(Exception e){
-        System.out.println("Integer overflow");
-        return "Integer overflow occured";
+        System.out.println("Integer overflow, ERROR: " + env.getProperty("error.output.intoverflow"));
+        return env.getProperty("error.output.intoverflow");
     }
 
     // TODO return proper json
     @ExceptionHandler(value=NumberFormatException.class)
+    @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
     public String handleMalformedInputException(Exception e){
-        System.out.println("Malformed input");
-        return "Malformed input";
+        System.out.println("Malformed input, ERROR: " + env.getProperty("error.input.malformednumbers"));
+        return env.getProperty("error.input.malformednumbers");
     }
 }
