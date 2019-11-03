@@ -5,7 +5,7 @@ agent any
 //     stage 'checkout project'
 //     checkout scm
     stage('checkout project') {
-      step{
+      steps{
         checkout scm
       }
     }
@@ -14,14 +14,14 @@ agent any
 //     sh "java -version"
 
     stage('checkout project') {
-          step{
+          steps{
             sh "mvn -v"
             sh "java -version"
           }
     }
 
     stage('running tests') {
-      step{
+      steps{
         sh "mvn test"
       }
     }
@@ -30,7 +30,7 @@ agent any
 //     sh "mvn test"
 
     stage('package') {
-      step{
+      steps{
         sh "mvn package"
       }
     }
@@ -38,35 +38,35 @@ agent any
 //     sh "mvn package"
 
     stage('report') {
-      step{
+      steps{
         $class: 'JUnitResultArchiver'
         testResults: '**/target/surefire-reports/TEST-*.xml'
       }
     }
 //     stage 'report'
-//     step([$class: 'JUnitResultArchiver', testResults: '**/target/surefire-reports/TEST-*.xml'])
+//     steps([$class: 'JUnitResultArchiver', testResults: '**/target/surefire-reports/TEST-*.xml'])
 
     stage('Artifact'){
-        step{
+        steps{
             $class: 'ArtifactArchiver'
             artifacts: '**/target/*.jar'
             fingerprint: true
         }
     }
 //     stage 'Artifact'
-//     step([$class: 'ArtifactArchiver', artifacts: '**/target/*.jar', fingerprint: true])
+//     steps([$class: 'ArtifactArchiver', artifacts: '**/target/*.jar', fingerprint: true])
 
 //     stage 'Docker Deploy Hub'
 //     environment {
 //         registry = "anatolyilin/demoapi"
 //         registryCredential = 'dockerhub'
 //       }
-//      step(
+//      steps(
 //             docker.build registry + ":$BUILD_NUMBER"
 //       )
 //
 //     stage('Deploy Image') {
-//       step{
+//       steps{
 //         script {
 //           docker.withRegistry( '', registryCredential ) {
 //             dockerImage.push()
@@ -76,7 +76,7 @@ agent any
 //     }
 //
 //     stage('Remove Unused docker image') {
-//       step{
+//       steps{
 //         sh "docker rmi $registry:$BUILD_NUMBER"
 //       }
 //     }
