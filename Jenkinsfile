@@ -13,7 +13,7 @@ agent any
 //     sh "mvn -v"
 //     sh "java -version"
 
-    stage('checkout project') {
+    stage('check env') {
           steps{
             sh "mvn -v"
             sh "java -version"
