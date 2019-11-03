@@ -33,7 +33,7 @@ public class NumberContainer {
     }
 
     public int add() throws Exception {
-            long res = Long.parseLong(number_a) + Integer.parseInt(number_b);
+            long res = Long.parseLong(number_a) + Long.parseLong(number_b);
 
             if (res < Integer.MAX_VALUE) {
                 return (int) res;
