@@ -3,7 +3,7 @@ node {
 //     stage 'checkout project'
 //     checkout scm
     stage('checkout project') {
-      steps{
+      step{
         checkout scm
       }
     }
@@ -12,14 +12,14 @@ node {
 //     sh "java -version"
 
     stage('checkout project') {
-          steps{
+          step{
             sh "mvn -v"
             sh "java -version"
           }
     }
 
     stage('running tests') {
-      steps{
+      step{
         sh "mvn test"
       }
     }
@@ -28,7 +28,7 @@ node {
 //     sh "mvn test"
 
     stage('package') {
-      steps{
+      step{
         sh "mvn package"
       }
     }
@@ -36,7 +36,7 @@ node {
 //     sh "mvn package"
 
     stage('report') {
-      steps{
+      step{
         $class: 'JUnitResultArchiver'
         testResults: '**/target/surefire-reports/TEST-*.xml'
       }
@@ -45,7 +45,7 @@ node {
 //     step([$class: 'JUnitResultArchiver', testResults: '**/target/surefire-reports/TEST-*.xml'])
 
     stage('Artifact'){
-        steps{
+        step{
             $class: 'ArtifactArchiver'
             artifacts: '**/target/*.jar'
             fingerprint: true
@@ -64,7 +64,7 @@ node {
 //       )
 //
 //     stage('Deploy Image') {
-//       steps{
+//       step{
 //         script {
 //           docker.withRegistry( '', registryCredential ) {
 //             dockerImage.push()
@@ -74,7 +74,7 @@ node {
 //     }
 //
 //     stage('Remove Unused docker image') {
-//       steps{
+//       step{
 //         sh "docker rmi $registry:$BUILD_NUMBER"
 //       }
 //     }
