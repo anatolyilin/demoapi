@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.domain.NumberContainer;
+import com.example.demo.services.ComputeService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.http.HttpStatus;
@@ -16,6 +17,11 @@ import javax.validation.Valid;
 public class CalculationController {
 
     public static final String BASE_URL = "/api/v1/compute/";
+    private final ComputeService computeService;
+
+    public CalculationController(ComputeService computeService) {
+        this.computeService = computeService;
+    }
 
     @ApiOperation(value ="GET method for adding to integers", response=Integer.class)
     @GetMapping("/add/{number_a}/{number_b}")
@@ -33,7 +39,7 @@ public class CalculationController {
 
     @ResponseStatus(HttpStatus.ACCEPTED)
     public String add(@ApiParam(value = "Json object with two integer values to add", required = true) @Valid @RequestBody(required = true)  NumberContainer numberContainer) throws Exception {
-        return ""+numberContainer.add();
+        return ""+computeService.add(numberContainer);
     }
 
     // TODO return proper json

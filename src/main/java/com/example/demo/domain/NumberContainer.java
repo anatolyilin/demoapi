@@ -31,15 +31,15 @@ public class NumberContainer {
     public String getNumber_b(){
         return number_b;
     }
-
-    public int add() throws Exception {
-            long res = Long.parseLong(number_a) + Integer.parseInt(number_b);
-
-            if (res < Integer.MAX_VALUE) {
-                return (int) res;
-            } else {
-                throw new ArithmeticException("Integer overflow");
-            }
-    }
+//
+//    public int add() throws Exception {
+//            long res = Long.parseLong(number_a) + Integer.parseInt(number_b);
+//
+//            if (res < Integer.MAX_VALUE) {
+//                return (int) res;
+//            } else {
+//                throw new ArithmeticException("Integer overflow");
+//            }
+//    }
 
 }
