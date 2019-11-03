@@ -60,8 +60,10 @@ agent any
 //     steps([$class: 'ArtifactArchiver', artifacts: '**/target/*.jar', fingerprint: true])
 
     stage('Docker Deploy Hub'){
+    steps{
          script {
                    dockerImage = docker.build registry + ":$BUILD_NUMBER"
+                 }
                  }
     }
 
