@@ -40,4 +40,9 @@ class NumberContainerTest {
         });
     }
 
+    @Test
+    void thisShouldFail(){
+        assertEquals(1,2);
+    }
+
 }
