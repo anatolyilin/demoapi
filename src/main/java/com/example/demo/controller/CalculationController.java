@@ -40,7 +40,9 @@ public class CalculationController {
     )
 
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public String add(@ApiParam(value = "Json object with two integer values to add", required = true) @Valid @RequestBody(required = true)  NumberContainer numberContainer) throws Exception {
+    public String add(    @ApiParam(value = "Json object with two integer values to add", required = true)
+                          @Valid
+                          @RequestBody(required = true)  NumberContainer numberContainer) throws Exception {
         return ""+numberContainer.add();
     }
 
