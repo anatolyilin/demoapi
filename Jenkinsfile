@@ -37,11 +37,11 @@ agent any
 //     stage 'package'
 //     sh "mvn package"
 
-    stage('report') {
-      steps{
-        $class: 'JUnitResultArchiver', testResults: '**/target/surefire-reports/TEST-*.xml'
-      }
-    }
+//     stage('report') {
+//       steps{
+//         $class: 'JUnitResultArchiver', testResults: '**/target/surefire-reports/TEST-*.xml'
+//       }
+//     }
 //     stage 'report'
 //     steps([$class: 'JUnitResultArchiver', testResults: '**/target/surefire-reports/TEST-*.xml'])
 
