@@ -99,6 +99,20 @@ class CalculationControllerTest {
     }
 
     @Test
+    void testIntOverflowSecond() throws Exception {
+        JsonObject post_body = new JsonObject();
+        post_body.addProperty("number_a", Integer.MAX_VALUE);
+        post_body.addProperty("number_b", Integer.MAX_VALUE);
+
+        MvcResult result = this.mockMvc.perform(post(CalculationController.BASE_URL+"/add/")
+                .contentType(MediaType.APPLICATION_JSON).content(String.valueOf(post_body)))
+                .andExpect(status().isNotAcceptable())
+                .andReturn();
+
+        assertEquals( env.getProperty("error.output.intoverflow"),result.getResponse().getContentAsString());
+    }
+
+    @Test
     void testMalformedInput() throws Exception {
         JsonObject post_body = new JsonObject();
         post_body.addProperty("number_a", "2324dsfdg3423");
