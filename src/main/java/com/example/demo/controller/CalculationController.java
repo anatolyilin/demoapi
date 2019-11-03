@@ -5,6 +5,8 @@ import com.example.demo.services.ComputeService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.Value;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.core.env.Environment;
@@ -21,6 +23,8 @@ import javax.validation.Valid;
 @Validated
 public class CalculationController {
 
+    Logger logger = LoggerFactory.getLogger(CalculationController.class);
+
     @Autowired
     private Environment env;
 
@@ -35,6 +39,7 @@ public class CalculationController {
     @GetMapping("/add/{number_a}/{number_b}")
     public int add(@ApiParam(value = "First integer", required = true)   @PathVariable int number_a,
                    @ApiParam(value = "Second integer", required = true)  @PathVariable int number_b){
+        logger.debug(String.format("GET compute method called with %s and %s values", number_a, number_b));
         return (number_a + number_b);
     }
 
@@ -45,6 +50,11 @@ public class CalculationController {
             produces = {MediaType.ALL_VALUE}
     )
     @ResponseStatus(HttpStatus.ACCEPTED)
+    public String add(    @ApiParam(value = "Json object with two integer values to add", required = true)
+                          @Valid
+                          @RequestBody(required = true)  NumberContainer numberContainer) throws Exception {
+        logger.debug(String.format("POST compute method called with %s and %s values", numberContainer.getNumber_a(), numberContainer.getNumber_b()));
+        return ""+numberContainer.add();
     public String add(@ApiParam(value = "Json object with two integer values to add", required = true) @Valid @RequestBody(required = true)  NumberContainer numberContainer) throws Exception {
         return ""+computeService.add(numberContainer);
     }
@@ -53,7 +63,7 @@ public class CalculationController {
     @ExceptionHandler(value=ArithmeticException.class)
     @ResponseStatus(HttpStatus.NOT_ACCEPTABLE)
     public String handleOverflowException(Exception e){
-        System.out.println("Integer overflow, ERROR: " + env.getProperty("error.output.intoverflow"));
+        logger.warn(env.getProperty("error.output.intoverflow"));
         return env.getProperty("error.output.intoverflow");
     }
 
@@ -61,7 +71,7 @@ public class CalculationController {
     @ExceptionHandler(value=NumberFormatException.class)
     @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
     public String handleMalformedInputException(Exception e){
-        System.out.println("Malformed input, ERROR: " + env.getProperty("error.input.malformednumbers"));
+        logger.warn(env.getProperty("error.input.malformednumbers"));
         return env.getProperty("error.input.malformednumbers");
     }
 }
