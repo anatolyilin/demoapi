@@ -7,6 +7,13 @@ pipeline {
 agent any
 
   stages {
+
+    stage('install maven'){
+        steps{
+            sh 'mvn clean install'
+        }
+    }
+
     stage('checkout project') {
       steps{
         checkout scm
