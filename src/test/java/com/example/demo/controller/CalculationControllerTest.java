@@ -85,6 +85,16 @@ class CalculationControllerTest {
     }
 
     @Test
+    void testAddGetOverflow() throws Exception {
+        MvcResult result = this.mockMvc.perform(get(CalculationController.BASE_URL+"/add/1000000000000/100000000000"))
+                .andDo(print())
+                .andExpect(status().isUnprocessableEntity())
+                .andReturn();
+
+        assertEquals( env.getProperty("error.input.malformednumbers"),result.getResponse().getContentAsString());
+    }
+
+    @Test
     void testIntOverflow() throws Exception {
         JsonObject post_body = new JsonObject();
         post_body.addProperty("number_a", Integer.MAX_VALUE);
