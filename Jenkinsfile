@@ -39,8 +39,7 @@ agent any
 
     stage('report') {
       steps{
-        $class: 'JUnitResultArchiver'
-        testResults: '**/target/surefire-reports/TEST-*.xml'
+        $class: 'JUnitResultArchiver', testResults: '**/target/surefire-reports/TEST-*.xml'
       }
     }
 //     stage 'report'
@@ -48,9 +47,7 @@ agent any
 
     stage('Artifact'){
         steps{
-            $class: 'ArtifactArchiver'
-            artifacts: '**/target/*.jar'
-            fingerprint: true
+            $class: 'ArtifactArchiver', artifacts: '**/target/*.jar', fingerprint: true
         }
     }
 //     stage 'Artifact'
