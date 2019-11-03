@@ -48,7 +48,7 @@ agent any
     stage('Artifact'){
         steps{
             archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
-            junit 'build/reports/**/*.xml'
+            junit '**/target/surefire-reports/TEST-*.xml'
         }
     }
 //     stage 'Artifact' $class: 'ArtifactArchiver', artifacts: '**/target/*.jar', fingerprint: true
