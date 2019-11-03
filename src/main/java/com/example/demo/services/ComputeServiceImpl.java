@@ -7,11 +7,12 @@ import org.springframework.stereotype.Service;
 public class ComputeServiceImpl implements ComputeService {
 
     @Override
-    public int add(NumberContainer numberContainer) throws Exception {
-        long res = Long.parseLong(numberContainer.getNumber_a()) + Integer.parseInt(numberContainer.getNumber_b());
+    public NumberContainer add(NumberContainer numberContainer) throws Exception {
+        long res = Long.parseLong(numberContainer.getNumber_a()) + Long.parseLong(numberContainer.getNumber_b());
 
             if (res < Integer.MAX_VALUE) {
-                return (int) res;
+                numberContainer.setResult( ((int) res) + "");
+                return numberContainer;
             } else {
                 throw new ArithmeticException("Integer overflow");
             }

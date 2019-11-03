@@ -47,16 +47,14 @@ public class CalculationController {
     @PostMapping(
             path="/add",
             consumes = {MediaType.APPLICATION_JSON_VALUE},
-            produces = {MediaType.ALL_VALUE}
+            produces = {MediaType.APPLICATION_JSON_VALUE}
     )
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public String add(    @ApiParam(value = "Json object with two integer values to add", required = true)
+    public NumberContainer add(    @ApiParam(value = "Json object with two integer values to add", required = true)
                           @Valid
                           @RequestBody(required = true)  NumberContainer numberContainer) throws Exception {
         logger.debug(String.format("POST compute method called with %s and %s values", numberContainer.getNumber_a(), numberContainer.getNumber_b()));
-        return ""+numberContainer.add();
-    public String add(@ApiParam(value = "Json object with two integer values to add", required = true) @Valid @RequestBody(required = true)  NumberContainer numberContainer) throws Exception {
-        return ""+computeService.add(numberContainer);
+        return computeService.add(numberContainer);
     }
 
     // TODO return proper json

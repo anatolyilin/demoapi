@@ -49,7 +49,12 @@ class CalculationControllerTest {
                 .andExpect(status().isAccepted())
                 .andReturn();
 
-        assertEquals("3",result.getResponse().getContentAsString());
+        JsonObject expected_json = new JsonObject();
+        expected_json.addProperty("number_a", "1");
+        expected_json.addProperty("number_b", "2");
+        expected_json.addProperty("result", "3");
+
+        assertEquals(expected_json.toString(),result.getResponse().getContentAsString().toString());
     }
 
     @Test
@@ -63,7 +68,12 @@ class CalculationControllerTest {
                 .andExpect(status().isAccepted())
                 .andReturn();
 
-        assertEquals("3",result.getResponse().getContentAsString());
+        JsonObject expected_json = new JsonObject();
+        expected_json.addProperty("number_a", "1");
+        expected_json.addProperty("number_b", "2");
+        expected_json.addProperty("result", "3");
+
+        assertEquals(expected_json.toString(),result.getResponse().getContentAsString().toString());
     }
 
     @Test
@@ -77,7 +87,12 @@ class CalculationControllerTest {
                 .andExpect(status().isAccepted())
                 .andReturn();
 
-        assertEquals("3",result.getResponse().getContentAsString());
+        JsonObject expected_json = new JsonObject();
+        expected_json.addProperty("number_a", "1");
+        expected_json.addProperty("number_b", "2");
+        expected_json.addProperty("result", "3");
+
+        assertEquals(expected_json.toString(),result.getResponse().getContentAsString().toString());
     }
 
     // test GET method function
