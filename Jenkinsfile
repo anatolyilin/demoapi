@@ -1,5 +1,7 @@
-node {
-  try{
+pipeline {
+agent any
+
+  stages {
 //     stage 'checkout project'
 //     checkout scm
     stage('checkout project') {
@@ -78,8 +80,5 @@ node {
 //         sh "docker rmi $registry:$BUILD_NUMBER"
 //       }
 //     }
-
-  }catch(e){
-    throw e;
-  }
+}
 }
