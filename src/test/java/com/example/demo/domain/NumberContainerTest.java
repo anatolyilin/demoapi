@@ -39,10 +39,4 @@ class NumberContainerTest {
             numberContainer.add();
         });
     }
-
-    @Test
-    void thisShouldFail(){
-        assertEquals(1,2);
-    }
-
 }
