@@ -7,16 +7,11 @@ pipeline {
 agent any
 
   stages {
-//     stage 'checkout project'
-//     checkout scm
     stage('checkout project') {
       steps{
         checkout scm
       }
     }
-//     stage 'check env'
-//     sh "mvn -v"
-//     sh "java -version"
 
     stage('check env') {
           steps{
@@ -31,24 +26,11 @@ agent any
       }
     }
 
-//     stage 'test'
-//     sh "mvn test"
-
     stage('package') {
       steps{
         sh "mvn package"
       }
     }
-//     stage 'package'
-//     sh "mvn package"
-
-//     stage('report') {
-//       steps{
-//         $class: 'JUnitResultArchiver', testResults: '**/target/surefire-reports/TEST-*.xml'
-//       }
-//     }
-//     stage 'report'
-//     steps([$class: 'JUnitResultArchiver', testResults: '**/target/surefire-reports/TEST-*.xml'])
 
     stage('Artifact'){
         steps{
@@ -56,15 +38,13 @@ agent any
             junit '**/target/surefire-reports/TEST-*.xml'
         }
     }
-//     stage 'Artifact' $class: 'ArtifactArchiver', artifacts: '**/target/*.jar', fingerprint: true
-//     steps([$class: 'ArtifactArchiver', artifacts: '**/target/*.jar', fingerprint: true])
 
     stage('Docker Deploy Hub'){
     steps{
          script {
                    dockerImage = docker.build registry + ":$BUILD_NUMBER"
-                 }
-                 }
+                }
+         }
     }
 
     stage('Deploy Image') {
