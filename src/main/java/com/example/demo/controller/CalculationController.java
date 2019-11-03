@@ -39,6 +39,7 @@ public class CalculationController {
             produces = {MediaType.ALL_VALUE}
     )
 
+    // TODO return proper json
     @ResponseStatus(HttpStatus.ACCEPTED)
     public String add(    @ApiParam(value = "Json object with two integer values to add", required = true)
                           @Valid
