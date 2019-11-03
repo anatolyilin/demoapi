@@ -1,4 +1,9 @@
 pipeline {
+    environment {
+        registry = "anatolyilin/demoapi"
+        registryCredential = 'dockerhub'
+      }
+
 agent any
 
   stages {
@@ -54,16 +59,11 @@ agent any
 //     stage 'Artifact' $class: 'ArtifactArchiver', artifacts: '**/target/*.jar', fingerprint: true
 //     steps([$class: 'ArtifactArchiver', artifacts: '**/target/*.jar', fingerprint: true])
 
-    stage('Docker Deploy Hub'){ }
-
-    environment {
-        registry = "anatolyilin/demoapi"
-        registryCredential = 'dockerhub'
-      }
-     steps(
-            docker.build registry + ":$BUILD_NUMBER"
-      )
-      }
+    stage('Docker Deploy Hub'){
+         script {
+                   dockerImage = docker.build registry + ":$BUILD_NUMBER"
+                 }
+    }
 
 //     stage('Deploy Image') {
 //       steps{
