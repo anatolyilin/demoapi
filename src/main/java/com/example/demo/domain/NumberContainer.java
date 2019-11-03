@@ -24,22 +24,10 @@ public class NumberContainer {
         this.number_b = number_b;
     }
 
-    public String getNumber_a(){
-        return number_a;
-    }
+    public String getNumber_a() { return number_a; }
 
     public String getNumber_b(){
         return number_b;
     }
-//
-//    public int add() throws Exception {
-//            long res = Long.parseLong(number_a) + Integer.parseInt(number_b);
-//
-//            if (res < Integer.MAX_VALUE) {
-//                return (int) res;
-//            } else {
-//                throw new ArithmeticException("Integer overflow");
-//            }
-//    }
 
 }

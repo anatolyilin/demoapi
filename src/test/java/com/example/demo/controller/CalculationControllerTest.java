@@ -1,11 +1,13 @@
 package com.example.demo.controller;
 
+import com.example.demo.services.ComputeService;
 import com.google.gson.JsonObject;
 import org.junit.Ignore;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.core.env.Environment;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -22,11 +24,15 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(CalculationController.class)
+@ComponentScan({"com.example.demo.services"})
 class CalculationControllerTest {
 
     // for mocking HTTP requests
     @Autowired
     private MockMvc mockMvc;
+
+    @Autowired
+    private ComputeService computeService;
 
     @Autowired
     private Environment env;
