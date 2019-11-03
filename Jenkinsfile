@@ -67,6 +67,16 @@ agent any
                  }
     }
 
+    stage('Deploy Image') {
+        steps{
+            script {
+                docker.withRegistry( '', registryCredential ) {
+                        dockerImage.push()
+                      }
+            }
+        }
+    }
+
 //     stage('Deploy Image') {
 //       steps{
 //         script {
