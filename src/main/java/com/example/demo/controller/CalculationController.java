@@ -38,9 +38,15 @@ public class CalculationController {
     @ApiOperation(value ="GET method for adding to integers", response=Integer.class)
     @GetMapping("/add/{number_a}/{number_b}")
     public int add(@ApiParam(value = "First integer", required = true)   @PathVariable int number_a,
-                   @ApiParam(value = "Second integer", required = true)  @PathVariable int number_b){
+                   @ApiParam(value = "Second integer", required = true)  @PathVariable int number_b) throws Exception{
         logger.debug(String.format("GET compute method called with %s and %s values", number_a, number_b));
-        return (number_a + number_b);
+        long res = number_a + number_b;
+        if (res < Integer.MAX_VALUE) {
+            return (int) res;
+        } else {
+            throw new ArithmeticException("Integer overflow");
+        }
+
     }
 
     @ApiOperation(value ="POST method for adding to integers or String encoded integers", response=Integer.class)
