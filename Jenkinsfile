@@ -24,11 +24,9 @@ node {
         registry = "anatolyilin/demoapi"
         registryCredential = 'dockerhub'
       }
-     steps{
-        script {
+     step(
             docker.build registry + ":$BUILD_NUMBER"
-        }
-      }
+      )
 
     stage('Deploy Image') {
       steps{
