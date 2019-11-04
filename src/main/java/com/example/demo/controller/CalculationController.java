@@ -29,7 +29,7 @@ public class CalculationController {
 
     public static final String BASE_URL = "/api/v1/compute/";
 
-    @ApiOperation(value ="GET method for adding to integers", response=Integer.class)
+    @ApiOperation(value ="GET method for adding two integers", response=Integer.class)
     @GetMapping("/add/{number_a}/{number_b}")
     public int add(@ApiParam(value = "First integer", required = true)   @PathVariable int number_a,
                    @ApiParam(value = "Second integer", required = true)  @PathVariable int number_b){
